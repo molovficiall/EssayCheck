@@ -1,3 +1,7 @@
 .welcome {
     color: blue;
 }
+.button {
+    color:blueviolet; 
+    box-sizing: content-box;
+}
