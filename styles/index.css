@@ -1,0 +1,147 @@
+* {
+    box-sizing: border-box;
+    justify-content: center;
+    align-items: center;
+}
+.box-container {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}
+.Header {
+  font-size: 50px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  font-family:'Comfortaa', sans-serif;
+  text-align: center;
+}
+.cont-subheader {
+    font-size: 35px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-family:'Comfortaa', sans-serif;
+}
+.cont-body {
+    font-size: 16px;
+    margin-bottom: 5px;
+    font-family:'Comfortaa', sans-serif;
+    padding: 5px;
+}
+.cont-body:hover {
+    background-color: #340e55;
+    padding:5px;
+    margin-left: 20px;
+    margin-right: 20px;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+.container1 {
+    width: 500px;
+    height: 400px;
+    border: solid 3px #340e55;
+    border-radius: 15px;
+    justify-content: center;
+    align-items: center;
+    background-color: #250a3c;
+    text-align: center;
+}
+.price {
+    font-size: 25px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-family:'Comfortaa', sans-serif;}
+.sub-button {
+    text-align: center;
+    width: 300px;
+    height: 50px;
+    color: #fbfbfb;
+    background-color: #7100bd;
+    border: 2px solid #7100bd;
+    border-radius: 15px;
+    cursor: pointer;
+    font-family:'Comfortaa', sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center; 
+    align-items: center;         
+}
+.cont1-color {
+    background-color: #7100bd;
+    color: #fbfbfb;
+    border-radius: 12.6px 12.6px 0 0;
+    overflow: hidden;
+    padding: 10px;
+}
+.sub-button:hover {
+    background-color: #fbfbfb;
+    color: #9900ff;
+    border: 2px solid #9900ff;
+    padding: 10px;
+    transition: all 0.5s ease;
+}
+.footer {
+    font-size: 12px;
+    text-align: center;
+    margin-top: 20px;
+    font-family:'Comfortaa', sans-serif;
+}
+/* Container to fix body layout and isolate background overflow */
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #0b0b12; /* Deep dark background makes the purple glow pop */
+  color: #ffffff;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Glowing Aura Background Elements */
+body::before,
+body::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.6;
+  z-index: -1;
+  pointer-events: none;
+  animation: floatGlow 12s ease-in-out infinite alternate;
+}
+
+/* Primary Purple Glow Top-Left */
+body::before {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(160, 32, 240, 0.8) 0%, rgba(120, 0, 255, 0) 70%);
+  top: 10%;
+  left: 15%;
+}
+
+/* Secondary Vibrant Glow Bottom-Right */
+body::after {
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(128, 0, 255, 0.7) 0%, rgba(75, 0, 130, 0) 70%);
+  bottom: 10%;
+  right: 15%;
+  animation-delay: -6s; /* Offset animation timing */
+}
+
+/* Smooth Movement Animation */
+@keyframes floatGlow {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(60px, -40px) scale(1.15);
+  }
+  100% {
+    transform: translate(-40px, 50px) scale(0.95);
+  }
+}
