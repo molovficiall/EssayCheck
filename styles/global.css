@@ -8,32 +8,14 @@ body {
 * {
     box-sizing: border-box;
 }
-.box-container {
-  display: flex;
-  flex-direction: row;
-  gap: 5px;
-}
-.button {
-  text-align: center;
-  width: 300px;
-  height: 200px;
-  color: #9900ff;
-  background-color: #2e2d2d;
-  border: 2px solid #000000;
-  border-radius: 15px;
-  padding: 20px;
-  margin: 15px;
-  cursor: pointer;
-  user-select: none; 
-}
-.sub-button:hover {
+.button:hover {
     background-color: #fbfbfb;
     color: #9900ff;
     border: 2px solid #9900ff;
     padding: 10px;
     transition: all 0.5s ease; 
 }
-.sub-button {
+.button {
     text-align: center;
     width: 300px;
     height: 50px;
@@ -45,4 +27,22 @@ body {
     font-family:'Comfortaa', sans-serif;
     font-size: 20px;
     font-weight: bold;
+}
+.body-text {
+    font-size: 16px;
+    margin-bottom: 5px;
+    font-family:'Comfortaa', sans-serif;
+    padding: 5px;
+}
+.header-text {
+    font-size: 25px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-family:'Comfortaa', sans-serif;
+}
+.subheader-text {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-family:'Comfortaa', sans-serif;
 }
