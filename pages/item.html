@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../styles/global.css" rel="stylesheet">
+    <link href="../styles/item.css" rel="stylesheet">
+    <script src="../styles/scripts/index.js" defer></script>
+    <title>Item | Weissmark</title>
+</head>
+<body class="item-page">
+    <header class="store-header">
+        <a class="store-brand" href="../index.html">Weissmark</a>
+        <a class="cart-link" href="#item-cart">
+            Cart <span id="cart-count" class="cart-count">0</span>
+        </a>
+    </header>
+    <main class="item-page-main">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+            <a href="../index.html">Collection</a>
+            <span aria-hidden="true">/</span>
+            <span id="breadcrumb-item">Item</span>
+        </nav>
+        <div id="item-page-content">
+            <section id="item-overview" aria-live="polite"></section>
+            <div class="item-lower-content">
+                <section class="content-section description-section" aria-labelledby="description-heading">
+                    <p class="section-kicker">The details</p>
+                    <h2 id="description-heading">Description</h2>
+                    <p id="item-description" class="section-copy"></p>
+                </section>
+                <section class="content-section item-information" aria-labelledby="information-heading">
+                    <p class="section-kicker">At a glance</p>
+                    <h2 id="information-heading">Product information</h2>
+                    <dl id="item-facts" class="item-facts"></dl>
+                </section>
+                <section id="item-reviews" class="content-section reviews-section" aria-labelledby="reviews-heading">
+                    <p class="section-kicker">Your experience</p>
+                    <h2 id="reviews-heading">Customer reviews</h2>
+                    <div id="review-list" class="review-list" aria-live="polite"></div>
+                    <form id="review-form" class="review-form">
+                        <h3>Write a review</h3>
+                        <label for="review-rating">Your rating</label>
+                        <select id="review-rating" name="rating" required>
+                            <option value="">Choose a rating</option>
+                            <option value="5">5 - Excellent</option>
+                            <option value="4">4 - Very good</option>
+                            <option value="3">3 - Good</option>
+                            <option value="2">2 - Fair</option>
+                            <option value="1">1 - Poor</option>
+                        </select>
+                        <label for="review-title">Review title</label>
+                        <input id="review-title" name="title" type="text" maxlength="80" required>
+                        <label for="review-body">Your review</label>
+                        <textarea id="review-body" name="body" rows="4" maxlength="1000" required></textarea>
+                        <button class="dark-button" type="submit">Submit review</button>
+                        <p id="review-status" class="action-status" role="status" aria-live="polite"></p>
+                    </form>
+                </section>
+                <section id="item-cart" class="content-section cart-section" aria-labelledby="cart-heading">
+                    <p class="section-kicker">Ready when you are</p>
+                    <h2 id="cart-heading">Your cart</h2>
+                    <div id="cart-items" class="cart-items" aria-live="polite"></div>
+                    <a class="dark-button cart-return-link" href="../index.html">Continue browsing</a>
+                </section>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

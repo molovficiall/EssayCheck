@@ -1,80 +1,8 @@
-.topbar {
-    background-color: #ffffff;
-    color: black;
-    padding: 10px;
-    padding-left: 1%;
-    padding-right: 1%;
-    font-size: 24px;
-    border-bottom: 1px solid #e0e0e0;
-    display: flex;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-.logo-text {
-    margin-left: 1.2%;
-    font-size: 24px;
-    font-weight: bold;
-    margin-right: 75%;
-}
-.signupbutton {
-    background-color: #4CAF50;
-    color: white;
-    padding-left: 50px;
-    padding-right: 50px;
-    margin-top: 10px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin-left: auto;
-    cursor: pointer;
-    margin-bottom: 10px;
-    border-radius: 5px;
-    border: 2px solid #4CAF50;
-}
-.signupbutton:hover {
-    border-radius: 5px;
-    background-color: white;
-    color: #4CAF50;
-    border: 2px solid #4CAF50;
-    transition: all 0.5s ease;
-}
-.topbarbutton {
-    border: none;
-    background-color: transparent;
-    color: black;
-    font-size: 16px;
-    margin-right: 10px;
-    margin-left: 10px;
-    margin-top: 30px;
-    margin-bottom: 30px;
-    text-decoration: none;
-}
-.topbarbutton:hover {
-    border: solid 1px #4CAF50;
-    border-radius: 5px;
-}
-.headersection {
-    text-align: center;
-    margin-top: 80px;
-    margin-bottom: 80px;
-}
-.writingsection {
-    display: flex;
-    justify-content: center;
-}
-.input{
-    height: 400px;
-    width: 80%;
-    resize: none;
-    font-size: 15px;
-    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    border-radius: 15px;
-    border-color: lightgray;
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-top: 10px;
-}
-.input:focus {
-    outline: none;
+.herocontainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #f5f5f5;
 }
