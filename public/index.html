@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#F3F6F8" />
+    <meta
+      name="description"
+      content="Technical streetwear, designed with intention. Explore the Idek Shirts collection."
+    />
+    <link rel="canonical" href="https://idekshirts.example/" />
+    <meta property="og:title" content="Idek Shirts — Technical streetwear" />
+    <meta
+      property="og:description"
+      content="Technical streetwear, designed with intention."
+    />
+    <meta property="og:type" content="website" />
+    <link
+      rel="icon"
+      href="/assets/brand/favicon/favicon.svg"
+      type="image/svg+xml"
+    />
+    <link rel="alternate icon" href="/assets/brand/favicon/favicon.ico" />
+    <link
+      rel="apple-touch-icon"
+      href="/assets/brand/favicon/apple-touch-icon.png"
+    />
+    <link rel="manifest" href="/assets/brand/favicon/site.webmanifest" />
+    <link
+      rel="preload"
+      href="/assets/fonts/Archivo-Variable.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/assets/fonts/IBMPlexSans-Variable.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="stylesheet" href="/assets/css/tokens.css" />
+    <link rel="stylesheet" href="/assets/css/base.css" />
+    <link rel="stylesheet" href="/assets/css/components.css" />
+    <link rel="stylesheet" href="/assets/css/layout.css" />
+    <script>
+      try {
+        const t = localStorage.getItem('idek-theme');
+        document.documentElement.dataset.theme =
+          t === 'light' || t === 'dark'
+            ? t
+            : matchMedia('(prefers-color-scheme: dark)').matches
+              ? 'dark'
+              : 'light';
+      } catch {}
+    </script>
+    <script type="module" src="/assets/js/theme.js"></script>
+    <script type="module" src="/assets/js/cart.js"></script>
+    <script type="module" src="/assets/js/storefront.js"></script>
+    <title>Idek Shirts — Technical streetwear</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <a class="brand" href="/" aria-label="Idek Shirts home"
+        ><img
+          class="logo-light"
+          src="/assets/brand/logo-placeholder.svg"
+          alt="Idek Shirts"
+          width="160"
+          height="40" /><img
+          class="logo-dark"
+          src="/assets/brand/logo-placeholder-dark.svg"
+          alt=""
+          width="160"
+          height="40"
+      /></a>
+      <nav class="header-nav" aria-label="Main navigation">
+        <a href="#shop">Shop</a><a href="/cart.html">Cart</a>
+      </nav>
+      <div class="header-actions">
+        <button
+          class="icon-button theme-toggle"
+          type="button"
+          aria-label="Switch theme"
+          aria-pressed="false"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="M12 3v2m0 14v2M3 12h2m14 0h2M5.6 5.6 7 7m10 10 1.4 1.4m0-12.8L17 7M7 17l-1.4 1.4M12 8v8m-4-4h8"
+            />
+          </svg>
+        </button>
+        <button
+          class="button cart-trigger"
+          type="button"
+          data-cart-open
+          aria-haspopup="dialog"
+        >
+          Cart <span class="cart-count" data-cart-count>0</span>
+        </button>
+      </div>
+    </header>
+    <dialog class="cart-drawer" data-cart-drawer aria-labelledby="drawer-title">
+      <div class="drawer-head">
+        <h2 id="drawer-title">Your cart</h2>
+        <button
+          class="icon-button"
+          type="button"
+          data-cart-close
+          aria-label="Close cart"
+        >
+          ×
+        </button>
+      </div>
+      <div data-cart-lines class="cart-list"></div>
+      <p class="notice" data-cart-message aria-live="polite"></p>
+      <div class="cart-summary">
+        <span>Subtotal</span><strong data-cart-subtotal>—</strong>
+      </div>
+      <button class="button button-primary" data-checkout type="button">
+        Checkout
+      </button>
+      <a class="button-ghost" href="/cart.html">View full cart</a>
+    </dialog>
+    <p class="sr-only" data-cart-live aria-live="polite"></p>
+    <main id="main" class="page-shell">
+      <section class="hero" aria-labelledby="hero-title">
+        <h1 class="hero-mark" id="hero-title">IDEK</h1>
+        <div class="hero-meta">
+          <p class="eyebrow">SS—26 / 001</p>
+          <p>
+            Objects for everyday movement. Designed to work hard and stay out of
+            the way.
+          </p>
+          <a class="button button-ghost" href="#shop"
+            >Explore the collection ↓</a
+          >
+        </div>
+      </section>
+      <section id="shop" aria-labelledby="shop-title">
+        <div class="section-heading">
+          <h2 id="shop-title">Current release</h2>
+          <span class="eyebrow">01 — Collection</span>
+        </div>
+        <p class="notice" data-product-error role="status"></p>
+        <div class="product-grid" data-products aria-live="polite"></div>
+      </section>
+    </main>
+    <footer class="site-footer">
+      <div class="footer-grid">
+        <div>
+          <a class="brand" href="/" aria-label="Idek Shirts home"
+            ><img
+              class="logo-light"
+              src="/assets/brand/logo-placeholder.svg"
+              alt="Idek Shirts"
+              width="160"
+              height="40" /><img
+              class="logo-dark"
+              src="/assets/brand/logo-placeholder-dark.svg"
+              alt=""
+              width="160"
+              height="40"
+          /></a>
+          <p>Thoughtful objects. Everyday uniform.</p>
+        </div>
+        <div>
+          <h2>Information</h2>
+          <nav class="footer-links" aria-label="Legal">
+            <a href="/privacy.html">Privacy</a><a href="/terms.html">Terms</a>
+          </nav>
+        </div>
+        <div>
+          <h2>Contact</h2>
+          <a href="mailto:[CONTACT_EMAIL]">[CONTACT_EMAIL]</a>
+        </div>
+      </div>
+      <div class="footer-bottom mono">
+        © 2026 IDEK SHIRTS — ALL RIGHTS RESERVED
+      </div>
+    </footer>
+  </body>
+</html>

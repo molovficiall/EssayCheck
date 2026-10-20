@@ -1,0 +1,35 @@
+{
+  "name": "idek-shirts",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler pages dev public",
+    "build": "npm run csp:hash && tsc --noEmit && eslint \"functions/**/*.ts\" \"public/assets/js/**/*.js\"",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint \"functions/**/*.ts\" \"public/assets/js/**/*.js\"",
+    "format": "prettier --write \"functions/**/*.ts\" \"public/**/*.html\" \"public/assets/css/**/*.css\" \"public/assets/js/**/*.js\" \"tests/**/*.ts\" \"README.md\" \"docs/**/*.md\"",
+    "format:check": "prettier --check \"functions/**/*.ts\" \"public/**/*.html\" \"public/assets/css/**/*.css\" \"public/assets/js/**/*.js\" \"tests/**/*.ts\" \"README.md\" \"docs/**/*.md\"",
+    "test": "vitest run",
+    "migrate:local": "wrangler d1 migrations apply idek-shirts --local",
+    "migrate:remote": "wrangler d1 migrations apply idek-shirts --remote",
+    "seed": "node scripts/seed.mjs",
+    "icons": "node scripts/generate-icons.mjs",
+    "csp:hash": "node scripts/csp-hash.mjs"
+  },
+  "dependencies": {
+    "jose": "5.9.6",
+    "zod": "3.24.2"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "5.20261019.1",
+    "@typescript-eslint/parser": "8.72.0",
+    "@typescript-eslint/eslint-plugin": "8.72.0",
+    "eslint": "10.13.0",
+    "globals": "16.0.0",
+    "prettier": "3.5.3",
+    "typescript": "5.8.3",
+    "vitest": "5.0.5",
+    "wrangler": "4.151.3"
+  }
+}

@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow,noarchive" />
+    <meta name="theme-color" content="#F3F6F8" />
+    <link
+      rel="icon"
+      href="/assets/brand/favicon/favicon.svg"
+      type="image/svg+xml"
+    />
+    <link rel="alternate icon" href="/assets/brand/favicon/favicon.ico" />
+    <link
+      rel="apple-touch-icon"
+      href="/assets/brand/favicon/apple-touch-icon.png"
+    />
+    <link rel="manifest" href="/assets/brand/favicon/site.webmanifest" />
+    <link
+      rel="preload"
+      href="/assets/fonts/Archivo-Variable.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/assets/fonts/IBMPlexSans-Variable.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="stylesheet" href="/assets/css/tokens.css" />
+    <link rel="stylesheet" href="/assets/css/base.css" />
+    <link rel="stylesheet" href="/assets/css/components.css" />
+    <link rel="stylesheet" href="/assets/css/layout.css" />
+    <link rel="stylesheet" href="/assets/css/admin.css" />
+    <script>
+      try {
+        const t = localStorage.getItem('idek-theme');
+        document.documentElement.dataset.theme =
+          t === 'light' || t === 'dark'
+            ? t
+            : matchMedia('(prefers-color-scheme: dark)').matches
+              ? 'dark'
+              : 'light';
+      } catch {}
+    </script>
+    <script type="module" src="/assets/js/theme.js"></script>
+    <script type="module" src="/assets/js/admin.js"></script>
+    <title>Catalog — Idek Shirts</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="admin-shell admin-header">
+      <div>
+        <a class="brand" href="/" aria-label="Idek Shirts home"
+          ><img
+            class="logo-light"
+            src="/assets/brand/logo-placeholder.svg"
+            alt="Idek Shirts"
+            width="160"
+            height="40" /><img
+            class="logo-dark"
+            src="/assets/brand/logo-placeholder-dark.svg"
+            alt=""
+            width="160"
+            height="40"
+        /></a>
+        <p class="eyebrow">Idek Shirts / Internal</p>
+        <h1>Catalog</h1>
+      </div>
+      <div class="header-actions">
+        <span data-admin-email class="mono">Loading session…</span
+        ><button
+          class="icon-button theme-toggle"
+          type="button"
+          aria-label="Switch theme"
+          aria-pressed="false"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="M12 3v2m0 14v2M3 12h2m14 0h2M5.6 5.6 7 7m10 10 1.4 1.4m0-12.8L17 7M7 17l-1.4 1.4M12 8v8m-4-4h8"
+            />
+          </svg>
+        </button>
+      </div>
+    </header>
+    <main id="main" class="admin-shell">
+      <p class="notice" data-admin-notice role="status" aria-live="polite"></p>
+      <section data-product-list aria-labelledby="products-heading">
+        <div class="admin-toolbar">
+          <h2 id="products-heading">Products</h2>
+          <div>
+            <label for="search-products" class="sr-only">Search products</label
+            ><input
+              id="search-products"
+              type="search"
+              placeholder="Search products"
+            /><label for="filter-status" class="sr-only">Filter status</label
+            ><select id="filter-status">
+              <option value="">All statuses</option>
+              <option value="draft">Draft</option>
+              <option value="published">Published</option>
+              <option value="archived">Archived</option></select
+            ><button
+              class="button button-primary"
+              type="button"
+              data-new-product
+            >
+              New product
+            </button>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Image</th>
+                <th>Name / slug</th>
+                <th>Price</th>
+                <th>Status</th>
+                <th>Stock</th>
+                <th>Updated</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody data-product-rows></tbody>
+          </table>
+        </div>
+      </section>
+      <section data-editor hidden aria-labelledby="editor-title">
+        <div class="admin-toolbar">
+          <h2 id="editor-title">New product</h2>
+          <button class="button" type="button" data-cancel-edit>
+            Back to catalog
+          </button>
+        </div>
+        <form class="admin-form" data-product-form>
+          <div class="admin-form-grid">
+            <label>Name<input name="name" required maxlength="80" /></label>
+            <label
+              >Slug<input
+                name="slug"
+                required
+                maxlength="80"
+                pattern="[a-z0-9]+(?:-[a-z0-9]+)*"
+            /></label>
+            <label
+              >Base price<input
+                name="price"
+                required
+                inputmode="decimal"
+                pattern="(?:0|[1-9][0-9]{0,5})(?:\.[0-9]{1,2})?"
+                placeholder="38.00"
+            /></label>
+            <label
+              >Currency<input
+                name="currency"
+                value="usd"
+                required
+                maxlength="3"
+                readonly
+            /></label>
+            <label class="full-field"
+              >Description<textarea
+                name="description"
+                maxlength="2000"
+              ></textarea>
+            </label>
+            <label
+              >Status<select name="status">
+                <option value="draft">Draft</option>
+                <option value="published">Published</option>
+              </select></label
+            >
+          </div>
+          <section class="admin-card">
+            <h3>Colors</h3>
+            <div data-colors></div>
+            <button class="button" type="button" data-add-color>
+              Add color
+            </button>
+          </section>
+          <section class="admin-card">
+            <h3>Sizes and stock</h3>
+            <p>
+              Choose sizes; stock is configured for every color and selected
+              size.
+            </p>
+            <div data-sizes></div>
+            <div data-stock-matrix></div>
+          </section>
+          <section class="admin-card">
+            <h3>Images</h3>
+            <label data-image-picker
+              >Choose or drop images (JPEG, PNG, WebP; max 5 MB each)<input
+                name="images"
+                type="file"
+                accept="image/jpeg,image/png,image/webp"
+                multiple
+            /></label>
+            <p
+              data-upload-progress
+              class="notice"
+              role="status"
+              aria-live="polite"
+            ></p>
+            <div data-image-list class="admin-image-list"></div>
+          </section>
+          <div class="admin-actions">
+            <button class="button" type="submit" data-save-draft>
+              Save draft</button
+            ><button class="button button-primary" type="submit" data-publish>
+              Publish</button
+            ><button class="button" type="button" data-archive hidden>
+              Archive
+            </button>
+          </div>
+        </form>
+      </section>
+    </main>
+    <dialog data-archive-dialog>
+      <p>Archive this product? It will no longer be available for sale.</p>
+      <div class="admin-actions">
+        <button class="button" type="button" data-confirm-archive>
+          Archive product</button
+        ><button class="button" type="button" data-dismiss-dialog>
+          Cancel
+        </button>
+      </div>
+    </dialog>
+  </body>
+</html>
