@@ -27,7 +27,7 @@
     "@typescript-eslint/eslint-plugin": "8.72.0",
     "eslint": "10.13.0",
     "globals": "16.0.0",
-    "prettier": "3.5.3",
+    "prettier": "3.9.10",
     "typescript": "5.8.3",
     "vitest": "5.0.5",
     "wrangler": "4.151.3"
