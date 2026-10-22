@@ -1,7 +1,5 @@
 node_modules/
-.wrangler/
-.dev.vars
-dist/
-coverage/
-*.log
-*.tsbuildinfo
+.env
+data/
+uploads/
+npm-debug.log*
