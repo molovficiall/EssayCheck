@@ -1,0 +1,19 @@
+name = "idek-shirts"
+compatibility_date = "2025-10-01"
+pages_build_output_dir = "public"
+
+[vars]
+SITE_URL = "https://essaycheck.kristofersberg.workers.dev/"          # CHANGE: your production origin, no trailing slash
+CURRENCY = "usd"
+SHIP_COUNTRIES = "US"   # CSV of ISO country codes Stripe may ship to
+AUTOMATIC_TAX = "false"                      # "true" once Stripe Tax is configured
+ACCESS_TEAM_DOMAIN = "kristofersberg.cloudflareaccess.com"  # CHANGE
+
+[[d1_databases]]
+binding = "DB"
+database_name = "idek-shirts"
+database_id = "de3af799-0747-4f4b-a7f9-541bbcc253dd"
+
+[[r2_buckets]]
+binding = "MEDIA"
+bucket_name = "idek-shirts-media"
