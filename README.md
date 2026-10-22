@@ -1,51 +1,24 @@
-# Atelier
+# Atelier shirt shop
 
-Static storefront + Cloudflare Pages Functions (TypeScript) + D1 (database) + R2 (images) + Stripe Checkout.
-No frontend framework, no third-party scripts, strict CSP.
+A small Node.js and Express storefront. The HTML pages in the repository root are served directly by `server.js`. Stripe Checkout handles payments, and a Stripe webhook sends paid-order notifications by email.
+
+## Run locally
+
+1. Install Node.js 20 or newer.
+2. Run `npm install`.
+3. Copy `.env.example` to `.env` and set real values for the Stripe test key, admin password, session secret, and SMTP settings.
+4. Run `npm start` and open `http://localhost:3000`.
 
 ## Deploy
 
-1. `npm ci`
-2. Create resources: `npx wrangler d1 create atelier-shirt-shop` and `npx wrangler r2 bucket create atelier-shirt-shop-media`.
-3. Create tables: `npm run db:remote` (local: `npm run db:local`).
-4. Edit `wrangler.toml` vars: `SITE_URL`, `SHIP_COUNTRIES`, `ACCESS_TEAM_DOMAIN`.
-5. Push to GitHub. Cloudflare dashboard > Workers & Pages > Create > Pages > connect repo. Set the build command to `npm run build` and output directory to `public`. If the project uses a custom deploy command, set it to `npm run deploy` (which runs `wrangler pages deploy ./public`); do not use `wrangler deploy`, which deploys a Worker rather than a Pages site. The Wrangler config also pins the output directory to `public`, keeping repository files such as `node_modules` out of the uploaded assets.
-6. Pages project > Settings > Variables and Secrets (type: Secret): `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`, `ACCESS_AUD`, `ADMIN_EMAILS` (comma separated), `IP_SALT` (long random string).
-7. Stripe dashboard > Developers > Webhooks > add `https://YOURDOMAIN/api/webhook`, events `checkout.session.completed` and `checkout.session.expired`; copy the signing secret to `STRIPE_WEBHOOK_SECRET`.
-8. Cloudflare Zero Trust > Access > Applications > Self-hosted. Add destinations `YOURDOMAIN/internal/*` and `YOURDOMAIN/api/internal/*` (also the `*.pages.dev` hostname, or disable it). Policy: Allow, your email(s), require MFA. Copy the Application Audience (AUD) tag to `ACCESS_AUD`, and your team domain to `ACCESS_TEAM_DOMAIN`.
-9. Replace brand files (see `public/brand/README.md`) and fill in the [BRACKETS] in `public/privacy.html` and `public/terms.html` (have them legally reviewed).
-10. Turn off Cloudflare Web Analytics for the project (its script would be blocked by the CSP).
+Deploy this project to a host that runs a persistent Node.js application. Configure the environment variables from `.env.example` in the host's secret/environment settings, then run `npm start`.
 
-Local dev: copy `.dev.vars.example` to `.dev.vars`, run `npm run db:local`, then `npm run dev`. Admin is at `http://localhost:8788/internal/catalog/` (auth bypass works on localhost only).
+Cloudflare Pages serves static files and does not run this Express server. The admin API, Stripe Checkout creation, sessions, uploads, and email webhook require the Node.js backend. To use Pages, the backend must be separately hosted and the frontend configured to call it, or the backend must be migrated to Cloudflare Pages Functions and compatible storage.
 
-## Releasing a product
+## Stripe order email
 
-Open `/internal/catalog/` > New product > fill in name, price, colors, sizes, stock, photos > Publish. Unpublish or Archive from the table. Prices and stock are always read from the database at checkout.
+Set `STRIPE_WEBHOOK_SECRET`, `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`, `SMTP_FROM`, and `ORDER_NOTIFICATION_EMAIL`. Configure a Stripe webhook at `/api/stripe/webhook` for `checkout.session.completed` and `checkout.session.async_payment_succeeded`.
 
-## OWASP mapping
+## Admin
 
-| Risk | Where |
-|---|---|
-| A01 Access control | `functions/_middleware.ts` guards `/internal/*` and `/api/internal/*` (404 when unauthenticated); Cloudflare Access + `authAdmin` JWT check (`_lib.ts`) with email allowlist; public API returns only published products |
-| A02 Crypto | HTTPS + HSTS; secrets only in Pages secrets; no card data touches the site (Stripe-hosted Checkout) |
-| A03 Injection | zod `.strict()` on every input; D1 prepared statements only; DOM built with `textContent`/`createElement`, never `innerHTML` with data |
-| A04 Insecure design | Server-side pricing and stock checks; atomic stock decrement in webhook (`UPDATE ... WHERE stock >= n` in a D1 batch); D1-backed rate limits (`rateLimit`) |
-| A05 Misconfiguration | CSP (no inline script/style, no `unsafe-*`), HSTS, nosniff, frame-ancestors none, COOP/CORP, Permissions-Policy, `no-store` on API; generic error messages |
-| A06 Components | 2 runtime deps (zod, jose); Dependabot; `npm audit` in CI |
-| A07 Auth | No passwords stored; Access SSO + MFA; JWT signature, issuer, audience, expiry verified |
-| A08 Integrity | Stripe signature (HMAC-SHA256, 5 min tolerance, constant-time) and event-ID replay protection |
-| A09 Logging | `audit` table for admin writes, bad webhook signatures, oversold orders; errors logged server-side only |
-| A10 SSRF | No user-supplied URLs are fetched; outbound only to Stripe and your Access JWKS |
-| CSRF | Admin writes require same-origin `Origin` + `X-Atelier` header (forces CORS preflight we never allow) |
-| Uploads | Magic-byte check (JPEG/PNG/WebP), 5 MB cap, random UUID names, served `nosniff` |
-
-## Also do in the Cloudflare dashboard
-
-- Security > WAF > Rate limiting rules: `/api/checkout` (10 per minute per IP) and `/api/internal/*` (30 per minute per IP) on top of the in-app limits.
-- GitHub: protect `main`, require PR review, enable secret scanning and push protection.
-- The obscure `/internal/catalog/` path is a minor extra layer only; real protection is Access + JWT + origin check.
-
-## Known limits
-
-- Stock is checked at checkout creation and decremented on payment. If two buyers pay for the last item, the later order is flagged `review` in `orders` (and audited) so you can refund it.
-- Orders are stored in D1 (`orders`); there is no order-management UI yet. View with `wrangler d1 execute atelier-shirt-shop --remote --command "SELECT * FROM orders ORDER BY created_at DESC LIMIT 20"`.
+Open the home page and use the admin section. The admin password is configured with `ADMIN_PASSWORD`; use a unique strong value in production. Product and settings data are stored under `data/`, and uploaded product images are stored under `uploads/`.
