@@ -9,7 +9,7 @@ No frontend framework, no third-party scripts, strict CSP.
 2. Create resources: `npx wrangler d1 create idek-shirts` (paste the `database_id` into `wrangler.toml`) and `npx wrangler r2 bucket create idek-shirts-media`.
 3. Create tables: `npm run db:remote` (local: `npm run db:local`).
 4. Edit `wrangler.toml` vars: `SITE_URL`, `SHIP_COUNTRIES`, `ACCESS_TEAM_DOMAIN`.
-5. Push to GitHub. Cloudflare dashboard > Workers & Pages > Create > Pages > connect repo. Build command `npm run build`, output directory `public`.
+5. Push to GitHub. Cloudflare dashboard > Workers & Pages > Create > Pages > connect repo. Build command `npm run build`, output directory `public`. `wrangler.toml` also pins the Pages output directory to `public`, preventing repository files such as `node_modules` from being uploaded as site assets.
 6. Pages project > Settings > Variables and Secrets (type: Secret): `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`, `ACCESS_AUD`, `ADMIN_EMAILS` (comma separated), `IP_SALT` (long random string).
 7. Stripe dashboard > Developers > Webhooks > add `https://YOURDOMAIN/api/webhook`, events `checkout.session.completed` and `checkout.session.expired`; copy the signing secret to `STRIPE_WEBHOOK_SECRET`.
 8. Cloudflare Zero Trust > Access > Applications > Self-hosted. Add destinations `YOURDOMAIN/internal/*` and `YOURDOMAIN/api/internal/*` (also the `*.pages.dev` hostname, or disable it). Policy: Allow, your email(s), require MFA. Copy the Application Audience (AUD) tag to `ACCESS_AUD`, and your team domain to `ACCESS_TEAM_DOMAIN`.
