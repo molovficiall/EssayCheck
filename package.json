@@ -4,6 +4,8 @@
   "private": true,
   "description": "A small, server-backed shirt shop with Stripe Checkout.",
   "scripts": {
+    "build": "node scripts/build-pages.js",
+    "dev": "npm run build && node scripts/dev-pages.js",
     "start": "node server.js"
   },
   "engines": {

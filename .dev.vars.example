@@ -1,0 +1,8 @@
+SITE_URL=http://localhost:8788
+ADMIN_PASSWORD=replace-with-a-unique-password-at-least-12-characters
+STRIPE_SECRET_KEY=sk_test_replace_me
+STRIPE_WEBHOOK_SECRET=whsec_replace_me
+ORDER_NOTIFICATION_EMAIL=owner@example.com
+RESEND_API_KEY=re_replace_me
+RESEND_FROM=Atelier <orders@your-verified-domain.example>
+IP_SALT=replace-with-a-long-random-secret
