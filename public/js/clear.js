@@ -1,1 +1,1 @@
-try{localStorage.removeItem('idek-cart')}catch{}
+try{localStorage.removeItem('atelier-cart')}catch{}

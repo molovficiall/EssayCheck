@@ -102,7 +102,7 @@ export async function authAdmin(req: Request, env: Env): Promise<string | null> 
 export function csrfOk(req: Request) {
   if (['GET', 'HEAD', 'OPTIONS'].includes(req.method)) return true;
   const origin = req.headers.get('Origin');
-  return origin === new URL(req.url).origin && req.headers.get('X-Idek') === '1';
+  return origin === new URL(req.url).origin && req.headers.get('X-Atelier') === '1';
 }
 
 // ---------- Stripe (fetch only; no SDK) ----------

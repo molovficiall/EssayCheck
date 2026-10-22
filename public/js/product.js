@@ -8,7 +8,7 @@ const { products } = await loadCatalog().catch(() => ({ products: [] }));
 const p = products.find(x => x.slug === slug);
 if (!p) root.replaceWith(h('div', { class: 'center' }, h('h1', {}, 'Not found'), h('p', {}, "That shirt isn't available."), h('a', { class: 'btn', href: '/' }, 'Back to shop')));
 else {
-  document.title = `${p.name} | Idek Shirts`;
+  document.title = `${p.name} | Atelier`;
   const colors = [...new Map(p.variants.map(v => [v.color, v.hex]))];
   const sizesAll = [...new Set(p.variants.map(v => v.size))];
   let color = (p.variants.find(v => v.stock > 0) || p.variants[0]).color, size = '', qty = 1, img = 0;

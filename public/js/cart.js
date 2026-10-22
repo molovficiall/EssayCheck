@@ -1,6 +1,6 @@
 import { h, icon, money, setCurrency, tee, mediaUrl, hydrateIcons, toast } from './ui.js';
 
-const KEY = 'idek-cart';
+const KEY = 'atelier-cart';
 let items = [];                       // [{ vid, qty }] - no prices are ever stored client-side
 let cat = { products: [], byVid: new Map() };
 const subs = new Set();

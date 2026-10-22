@@ -1,6 +1,6 @@
 // Classic (blocking) script in <head>: sets the theme before first paint, no inline script needed (CSP-safe).
 (() => {
-  const KEY = 'idek-theme', root = document.documentElement, mq = matchMedia('(prefers-color-scheme: dark)');
+  const KEY = 'atelier-theme', root = document.documentElement, mq = matchMedia('(prefers-color-scheme: dark)');
   const stored = () => { try { return localStorage.getItem(KEY); } catch { return null; } };
   const resolve = () => { const s = stored(); return s === 'dark' || s === 'light' ? s : mq.matches ? 'dark' : 'light'; };
   const apply = (t) => {

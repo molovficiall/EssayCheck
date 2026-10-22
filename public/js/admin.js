@@ -3,7 +3,7 @@ import { h, icon, money, tee, mediaUrl, toast, setCurrency } from './ui.js';
 const app = document.getElementById('app');
 const api = async (path, { method = 'GET', body, raw } = {}) => {
   const r = await fetch('/api/internal/' + path, {
-    method, headers: { 'X-Idek': '1', ...(body && !raw ? { 'Content-Type': 'application/json' } : {}), ...(raw ? { 'Content-Type': raw.type } : {}) },
+    method, headers: { 'X-Atelier': '1', ...(body && !raw ? { 'Content-Type': 'application/json' } : {}), ...(raw ? { 'Content-Type': raw.type } : {}) },
     body: raw ? raw : body ? JSON.stringify(body) : undefined,
   });
   if (r.status === 404) throw new Error('Session expired. Reload the page.');

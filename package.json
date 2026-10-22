@@ -6,6 +6,7 @@
   "scripts": {
     "build": "node scripts/copy-fonts.mjs",
     "dev": "npm run build && wrangler pages dev public",
+    "deploy": "wrangler pages deploy ./public --project-name atelier-shirt-shop",
     "start": "node server.js",
     "audit": "npm audit --audit-level=high"
   },

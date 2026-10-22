@@ -1,19 +1,19 @@
-# Idek Shirts
+# Atelier
 
 Static storefront + Cloudflare Pages Functions (TypeScript) + D1 (database) + R2 (images) + Stripe Checkout.
 No frontend framework, no third-party scripts, strict CSP.
 
 ## Deploy
 
-1. `npm install`
-2. Create resources: `npx wrangler d1 create idek-shirts` (paste the `database_id` into `wrangler.toml`) and `npx wrangler r2 bucket create idek-shirts-media`.
+1. `npm ci`
+2. Create resources: `npx wrangler d1 create atelier-shirt-shop` and `npx wrangler r2 bucket create atelier-shirt-shop-media`.
 3. Create tables: `npm run db:remote` (local: `npm run db:local`).
 4. Edit `wrangler.toml` vars: `SITE_URL`, `SHIP_COUNTRIES`, `ACCESS_TEAM_DOMAIN`.
-5. Push to GitHub. Cloudflare dashboard > Workers & Pages > Create > Pages > connect repo. Build command `npm run build`, output directory `public`. `wrangler.toml` also pins the Pages output directory to `public`, preventing repository files such as `node_modules` from being uploaded as site assets.
+5. Push to GitHub. Cloudflare dashboard > Workers & Pages > Create > Pages > connect repo. Set the build command to `npm run build` and output directory to `public`. If the project uses a custom deploy command, set it to `npm run deploy` (which runs `wrangler pages deploy ./public`); do not use `wrangler deploy`, which deploys a Worker rather than a Pages site. The Wrangler config also pins the output directory to `public`, keeping repository files such as `node_modules` out of the uploaded assets.
 6. Pages project > Settings > Variables and Secrets (type: Secret): `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`, `ACCESS_AUD`, `ADMIN_EMAILS` (comma separated), `IP_SALT` (long random string).
 7. Stripe dashboard > Developers > Webhooks > add `https://YOURDOMAIN/api/webhook`, events `checkout.session.completed` and `checkout.session.expired`; copy the signing secret to `STRIPE_WEBHOOK_SECRET`.
 8. Cloudflare Zero Trust > Access > Applications > Self-hosted. Add destinations `YOURDOMAIN/internal/*` and `YOURDOMAIN/api/internal/*` (also the `*.pages.dev` hostname, or disable it). Policy: Allow, your email(s), require MFA. Copy the Application Audience (AUD) tag to `ACCESS_AUD`, and your team domain to `ACCESS_TEAM_DOMAIN`.
-9. Replace brand files (see `public/brand/README.md`) and fill in the [BRACKETS] in `privacy.html` and `terms.html` (have them legally reviewed).
+9. Replace brand files (see `public/brand/README.md`) and fill in the [BRACKETS] in `public/privacy.html` and `public/terms.html` (have them legally reviewed).
 10. Turn off Cloudflare Web Analytics for the project (its script would be blocked by the CSP).
 
 Local dev: copy `.dev.vars.example` to `.dev.vars`, run `npm run db:local`, then `npm run dev`. Admin is at `http://localhost:8788/internal/catalog/` (auth bypass works on localhost only).
@@ -36,7 +36,7 @@ Open `/internal/catalog/` > New product > fill in name, price, colors, sizes, st
 | A08 Integrity | Stripe signature (HMAC-SHA256, 5 min tolerance, constant-time) and event-ID replay protection |
 | A09 Logging | `audit` table for admin writes, bad webhook signatures, oversold orders; errors logged server-side only |
 | A10 SSRF | No user-supplied URLs are fetched; outbound only to Stripe and your Access JWKS |
-| CSRF | Admin writes require same-origin `Origin` + `X-Idek` header (forces CORS preflight we never allow) |
+| CSRF | Admin writes require same-origin `Origin` + `X-Atelier` header (forces CORS preflight we never allow) |
 | Uploads | Magic-byte check (JPEG/PNG/WebP), 5 MB cap, random UUID names, served `nosniff` |
 
 ## Also do in the Cloudflare dashboard
@@ -48,4 +48,4 @@ Open `/internal/catalog/` > New product > fill in name, price, colors, sizes, st
 ## Known limits
 
 - Stock is checked at checkout creation and decremented on payment. If two buyers pay for the last item, the later order is flagged `review` in `orders` (and audited) so you can refund it.
-- Orders are stored in D1 (`orders`); there is no order-management UI yet. View with `wrangler d1 execute idek-shirts --remote --command "SELECT * FROM orders ORDER BY created_at DESC LIMIT 20"`.
+- Orders are stored in D1 (`orders`); there is no order-management UI yet. View with `wrangler d1 execute atelier-shirt-shop --remote --command "SELECT * FROM orders ORDER BY created_at DESC LIMIT 20"`.
