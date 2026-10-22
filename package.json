@@ -1,11 +1,13 @@
 {
-<<<<<<< HEAD
   "name": "atelier-shirt-shop",
   "version": "1.0.0",
   "private": true,
   "description": "A small, server-backed shirt shop with Stripe Checkout.",
   "scripts": {
-    "start": "node server.js"
+    "build": "node scripts/copy-fonts.mjs",
+    "dev": "npm run build && wrangler pages dev public",
+    "start": "node server.js",
+    "audit": "npm audit --audit-level=high"
   },
   "engines": {
     "node": ">=20"
@@ -19,20 +21,7 @@
     "helmet": "^8.0.0",
     "multer": "^2.0.2",
     "nodemailer": "^10.2.0",
-    "stripe": "^17.7.0"
-=======
-  "name": "idek-shirts",
-  "private": true,
-  "type": "module",
-  "scripts": {
-    "build": "node scripts/copy-fonts.mjs",
-    "dev": "npm run build && wrangler pages dev",
-    "db:local": "wrangler d1 execute idek-shirts --local --file=schema.sql",
-    "db:remote": "wrangler d1 execute idek-shirts --remote --file=schema.sql",
-    "typecheck": "tsc --noEmit",
-    "audit": "npm audit --audit-level=high"
-  },
-  "dependencies": {
+    "stripe": "^17.7.0",
     "jose": "^6.0.0",
     "zod": "^4.0.0"
   },
@@ -41,6 +30,5 @@
     "@fontsource-variable/bricolage-grotesque": "^5.2.0",
     "typescript": "^5.9.3",
     "wrangler": "^4.0.0"
->>>>>>> 74e5c14b2a48d0bb4c9d1b17c9fc561689b9c85c
   }
 }
